@@ -16,7 +16,7 @@ class MobileConnect:
         """ Connect to device """
         try:
             subprocess.check_output(["adb", "tcpip", f'{self.port}'])
-        except subprocess.TimeoutExpired:
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
             pass
 
         result = subprocess.check_output(["adb", "connect", f"{self.ip_address}:{self.port}"], stderr=subprocess.STDOUT,
